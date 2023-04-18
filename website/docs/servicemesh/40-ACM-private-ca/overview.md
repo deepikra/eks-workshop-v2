@@ -44,7 +44,7 @@ To do the below instructions, you need the following:
 ## Target architecture 
 
 The following architecture provides an overall picture of the solution described here.
-![private-ca-architecture](../../assets/private-ca-architecture.png)
+![private-ca-architecture](../assets/private-ca-architecture.png)
 
 Upon ISTIO installation, ISTIO creates a CA to sign the certificates. This generated CA is stored in the Istio installation namespace as a secret named istio-ca-secret and is shared with istiod replicas. The default behavior can be overridden by plugging in our CA (ACM Private CA), which Istio CA uses rather than creating a new one. To do so, we must save the CA certificates in the installation namespace istio-system as a secret named cacerts, which contains the following information:
 
