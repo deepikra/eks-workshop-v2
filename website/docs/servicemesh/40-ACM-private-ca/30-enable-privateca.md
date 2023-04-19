@@ -1,17 +1,16 @@
 ---
-title: Enabling ISTIO, Cert Manager and AWS Private CA Issuer using EKS Blueprints
+title: Enabling Cert Manager and AWS Private CA Issuer using EKS Blueprints
 sidebar_position: 30
 weight: 5
 ---
 
-## Enabling ISTIO, Cert Manager and AWS Private CA Issuer using EKS Blueprints
+## Enabling Cert Manager and AWS Private CA Issuer using EKS Blueprints
 
 Before proceeding with the integration steps, you must first install ISTIO and cert-manager on your EKS cluster. The following **\<replace example used from EKS blueprints\>** example deploys a new EKS cluster with a managed node group. It will also bootstrap the cluster with **vpc-cni, coredns, kube-proxy, istio, cert-manager, and aws_privateca_issuer add-ons**. Indicating that an add-on should be installed in an EKS cluster is as simple as setting a boolean value to *true*.
 
 Edit the main.tf file located in the root path of the example used. Add the following lines under the module eks_blueprints_kubernetes_addons:
 ```bash
   #K8s Add-ons
-  enable_tetrate_istio                = true
   enable_cert_manager                 = true
   
   # The AWS PrivateCA Issuer plugin acts as an addon to cert-manager that 
