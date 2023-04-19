@@ -5,7 +5,7 @@ weight: 5
 ---
 ## Setting up ACM Private CA and Creating Intermediate CA
 
-Add the following lines under the above lines in the root Terraform module's main.tf file. Those resources will create, configure and activate a Root CA and create the CAS.
+Add the following lines under the above lines in the root Terraform module's *main.tf* file. Those resources will create, configure and activate a Root CA and create the CAS.
 
 ```bash
 ## Setting up ACM Private CA
@@ -80,12 +80,12 @@ STACK
 ```
 
 ## Generating intermediate CA from AWS ACM Private CA using Getmesh Cli
-To sign the certificates of ISTIO-managed workloads, you must first create an intermediate CA from AWS ACM Private CA. The getmesh cli tool is used to create those configurations.
+To sign the certificates of ISTIO-managed workloads, you must first create an intermediate CA from AWS ACM Private CA. The *getmesh cli* tool is used to create those configurations.
 
-To do so, you must provide the SSL certificate's attributes, the ARN of the ACM Private CA (Root CA), the istiod namespace (istio-system by default), the validity days, key length, and, most importantly, override the existing cacert secret.
+To do so, you must provide the SSL certificate's attributes, the ARN of the ACM Private CA (Root CA), the istiod namespace (istio-system by default), the validity days, key length, and, most importantly, override the existing **cacert** secret.
 
 
-Add the following lines sample under the above lines in the root Terraform module's main.tf file. Those resources will install getmesh cli tool, and create this intermediate CA.
+Add the following lines sample under the above lines in the root Terraform module's *main.tf* file. Those resources will install getmesh cli tool, and create this intermediate CA.
 
 ```bash
 ## Generating the Intermediate CA 
@@ -175,7 +175,7 @@ Certificate:
                 Public-Key: (2048 bit)
 ...
 ```
-Before proceeding, ensure that the istiod Pod in the istio-system namespace is deleted to force ISTIO using the newly created cacerts for the workload.
+Before proceeding, ensure that the **istiod** Pod in the **istio-system** namespace is deleted to force ISTIO using the newly created **cacerts** for the workload.
 ```bash
 kubectl delete po -l app=istiod -n istio-system
 ```
