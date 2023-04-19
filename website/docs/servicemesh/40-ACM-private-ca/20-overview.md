@@ -21,10 +21,8 @@ We will issue a private certificate to an ISTIO Ingress Gateway using the AWS AC
 To do the below instructions, you need the following:
 
 * An AWS account.
-* The AWS Command Line Interface (AWS CLI), with the kubectl and eksctl tools installed and configured. Follow the instructions in Getting started with Amazon EKS – eksctl in the Amazon EKS User Guide.
+* The AWS Command Line Interface (AWS CLI), with the kubectl and eksctl tools installed and configured.
 * Terraform
-* A clone of the repository https://github.com/aws-ia/terraform-aws-eks-blueprints.git to your machine.
-* Familiarity with Kubernetes and ISTIO Service Mesh.
 * A clone of the Github repository https://github.com/aws-ia/terraform-aws-eks-blueprints.
 
 ## Limitations 
