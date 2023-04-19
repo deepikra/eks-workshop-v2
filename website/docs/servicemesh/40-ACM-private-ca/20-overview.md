@@ -16,28 +16,12 @@ SSL/TLS certificates are required to encrypt connections and identify resources 
 
 We will issue a private certificate to an ISTIO Ingress Gateway using the AWS ACM Private CA service. When you use ACM Private CA, you can put strong iam protection around that certificate authority as well as monitor and audit it.
 
-## Prerequisites 
-
-To do the below instructions, you need the following:
-
-* An AWS account.
-* The AWS Command Line Interface (AWS CLI), with the kubectl and eksctl tools installed and configured.
-* Terraform
-* A clone of the Github repository https://github.com/aws-ia/terraform-aws-eks-blueprints.
-
 ## Limitations 
 
 * This only applies to the issuance of certificates for internal workloads running in Kubernetes namespaces managed by ISTIO Service Mesh, not for workloads that must be accessible publicly on the internet.
 * We'll proceed under the assumption that you're deploying your cluster using EKS Blueprints. If not, you can deploy the required addons on your own and essentially follow the same steps.
 * We are using an example from the EKS Blueprints. Feel free to modify it, use another, or, if you want, create your own.
 
-## Product versions
-
-* AWS CLI version 2.7.13 or later
-* eksctl CLI version 0.95.0 or later
-* Amazon EKS cluster version 1.21 or later
-* kubectl tool version 1.21 or later
-* Istio Tetrate Helm Chart version 0.0.7 or later
 
 ## Target architecture 
 
