@@ -8,7 +8,7 @@ In this task, you will learn how to use the Istio's traffic mirroring capability
 
 Traffic mirroring is a powerful concept that enables introducing new features/changes into production with the least amount of risk. Mirroring copies live traffic and sends it to a mirrored service. The mirrored traffic occurs outside of the critical request path for the primary service.
 
-In this task, all traffic will be directed to ui-v1 of the *ui* service but a user with a unique SESSION ID=XXX will be routed to the deployment ui-v2. You will create a VirtualService rule to force all traffic that go to ui-v2, to be mirrored and directed to a mirror service, which can be helpful for troubleshooting, testing, or monitorization.
+In this task, all traffic will be directed to ui-v1 of the *ui* service but a user accessing from Safari browser will be routed to the deployment ui-v2. You will create a VirtualService rule to force all traffic that go to ui-v2, to be mirrored and directed to a mirror service, which can be helpful for troubleshooting, testing, or monitorization.
 
 Assuming you have the application already deployed with the three versions of the ui service.
 
@@ -51,9 +51,9 @@ Next, configure a service for it
 kubectl apply -k /workspace/modules/servicemesh/traffic-management/mirroring/service-mirror.yaml
 ```
 
-Now, we need to mirror the traffic when traffic routed to ui-v2. Traffic will be routed to ui-v2 only when accessing with SessionID=XXX
+Now, we need to mirror the traffic when traffic routed to ui-v2. Traffic will be routed to ui-v2 only when accessing from Safari browser.
 
-Create a VirtualService with the following mirroring routing role, which will route all traffic to ui-v1 by default, but a user with SessionID=XXX, the traffic will be routed to ui-v2 and 100% of it will be mirrored to the mirror service.
+Create a VirtualService with the following mirroring routing role, which will route all traffic to ui-v1 by default, but the traffic will be routed to ui-v2 and 100% of it will be mirrored to the mirror service when a user reaches it from Safari browser.
 ```file
 /workspace/modules/servicemesh/traffic-management/mirroring/virtualservice.yaml
 ```
@@ -65,7 +65,7 @@ kubectl apply -k /workspace/modules/servicemesh/traffic-management/mirroring/vir
 As a result of this rule, when you hit the home page, any traffic goes to ui-v2 will be mirrored to the mirror servcie.
 
 
-So let's see how it works, by hitting the homepage without SessionID=XXX, and you will notice that the page displays ui-v1.
+So let's see how it works, by hitting the homepage from Chrome broswer, and you will notice that the page displays ui-v1.
 ![homepage-no-sessionid-v1](../assets/homepage-no-sessionid-v1.png)
 
 Now, let's open **Kiali**. Get the DNS name of the AWS ALB of Kilai, then hit it in the browser.
@@ -75,12 +75,12 @@ Navigate to *Workloads* in the Kiali dashboard. Choose the *mirror* pod. Then, h
 Finally, set the *Time Range* to **Last 1m**, and the *Refresh interval* to **Every 10s**.
 
 ![kilai-mirror-ui-v1](../assets/kilai-mirror-ui-v1.png)
-Notice here in the logs, that there is no traffic yet mirrored to the mirror service, since we did not access the page with SessionID=XXX.
+Notice here in the logs, that there is no traffic yet mirrored to the mirror service, since we did not access the page from Safari browser.
 
 
 
 ![kilai-mirror-ui-v2](../assets/kilai-mirror-ui-v2.png)
-So, by mirroring the traffic, you were able to gather information on internal communication without affecting the actual service, and you saw how the forwarded header contains the Session ID mentioned in the VirtualService rule.
+So, by mirroring the traffic, you were able to gather information on internal communication without affecting the actual service. 
 
 
 **__Note__**
