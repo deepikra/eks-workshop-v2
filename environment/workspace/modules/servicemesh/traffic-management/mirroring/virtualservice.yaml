@@ -10,8 +10,8 @@ spec:
   http:
   - match:
     - headers:
-        cookie:
-          regex: "^(.*?;)?(SESSIONID=9af9874c-f8ce-4e50-b0eb-8aa456f4db7e)(;.*)?$"
+        baggage-user-agent:
+          regex: .*Safari.*
     route:
     - destination:
         host: ui
